@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viptour.tech</title>
+  <link rel="stylesheet" href="../static/css/login.css" />
+  <link rel="shortcut icon" href="../static/images/bus.ico" type="image/x-icon">
+  
+</head>
+
+<body>
+  <main>
+    <div class="box">
+      <div class="inner-box">
+        <div class="forms-wrap">
+          <form action="" autocomplete="" class="sign-in-form">
+            <div class="logo">
+              <img src="../static/images/bus.ico" alt="easyclass" />
+
+              <h4><br><br>Tour Transport Services<br><br></h4>
+            </div>
+
+            <div class="heading">
+              <h2>Welcome Back</h2>
+              <h6>Not registred yet?</h6>
+              <a href="#" class="toggle">Sign up</a>
+            </div>
+
+            <div class="actual-form">
+              <div class="input-wrap">
+                <input type="text" minlength="4" class="input-field" autocomplete="off" required id="name_SN" />
+                <label>Name</label>
+              </div>
+
+              <div class="input-wrap">
+                <input type="password" id="pass_SN" minlength="4" class="input-field" autocomplete="off" required />
+                <label>Password</label>
+              </div>
+
+              <input type="submit" value="Sign In" id="signin-btn" />
+              
+              <p class="text">
+                Forgot your password or your login details?
+                <a href="#">Get help</a> signing in
+              </p>
+            </div>
+          </form>
+
+          <form action="" autocomplete="" class="sign-up-form">
+            <div class="logo">
+              <img src="../static/images/bus.ico" alt="easyclass" />
+
+              <h4><br><br>Tour Transport Services<br><br></h4>
+            </div>
+
+            <div class="heading">
+              <h2>Get Started</h2>
+              <h6>Already have an account?</h6>
+              <a href="#" class="toggle">Sign in</a>
+            </div>
+
+            <div class="actual-form">
+              <div class="input-wrap">
+                <input id="name_SU" type="text" minlength="4" class="input-field" autocomplete="off" required />
+                <label>Name</label>
+              </div>
+
+              <div class="input-wrap">
+                <input type="email" class="input-field" autocomplete="off" required id="email_SU" />
+                <label>Email</label>
+              </div>
+
+              <div class="input-wrap">
+                <input type="password" id="pass_SU" minlength="4" class="input-field" autocomplete="off" required />
+                <label>Password</label>
+              </div>
+
+              <input type="submit" value="Sign Up" id="sign-btn" />
+
+              <p class="text">
+                By signing up, I agree to the
+                <a href="#">Terms of Services</a> and
+                <a href="#">Privacy Policy</a>
+              </p>
+            </div>
+          </form>
+        </div>
+
+        <div class="carousel">
+          <div class="images-wrapper">
+            <img src="../static/images/IMG_1835.JPG" class="image img-1 show" alt="" />
+            <img src="../static/images/IMG_1836.JPG" class="image img-2" alt="" />
+            <img src="../static/images/IMG_1837.JPG" class="image img-3" alt="" />
+          </div>
+
+          <div class="text-slider">
+            <div class="text-wrap">
+              <div class="text-group">
+                <h2>Tour Transport Services</h2>
+                <h2>Hoi An-VietNam</h2>
+                <h2>Summer Sunset in Australia</h2>
+              </div>
+            </div>
+
+            <div class="bullets">
+              <span class="active" data-value="1"></span>
+              <span data-value="2"></span>
+              <span data-value="3"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Javascript file -->
+
+  
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+    // import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+    import { getDatabase, ref, set, child, get } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
+
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAutdWKLA6w90IuTVqSUCCM42_UkuVqBy4",
+      authDomain: "swift-area-275101.firebaseapp.com",
+      projectId: "swift-area-275101",
+      storageBucket: "swift-area-275101.appspot.com",
+      messagingSenderId: "1072376327891",
+      appId: "1:1072376327891:web:9273ed10fa05c226fbee26"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase();
+
+    // Khai báo biến
+    const name_SN = document.getElementById('name_SN');
+    const pass_SN = document.getElementById('pass_SN');
+    const submit_SN = document.getElementById('signin-btn');
+
+    // Xử lý logic đăng nhập
+
+    function authenUser() {
+
+    const dbRef = ref(db);
+
+    get(child(dbRef, "User/" + name_SN.value)).then((result) => {
+
+        // nếu tài khoản username chưa tồn tại
+        if (result.exists()) {
+            let dbpass = decPass(result.val().password);
+            
+            if (dbpass == pass_SN.value) {
+                login(result.val());
+            } else {
+                alert("user not exist");
+            }
+        } else {
+            // nếu tài khoản username chưa tồn tại 
+
+            alert("username or password incorrect");
+        }
+    })
+    }
+
+
+    // giải mã mật khẩu
+
+    function decPass(firePass) {
+      var encryptionPass = CryptoJS.AES.decrypt(firePass, pass_SN.value);
+      return encryptionPass.toString(CryptoJS.enc.Utf8);
+    }
+
+    //login
+    function login(user) {
+      // let keepLogIn = document.getElementById('customSwitch').checked;
+
+      // if (!customSwitch) {
+      //   console.log("ok")
+      //   sessionStorage.setItem('user', JSON.stringify(user));
+      //   window.location = "main.html";
+      // }
+      // else {
+        console.log("ok2")
+
+        localStorage.setItem('keepLogIn', 'Yes');
+        localStorage.setItem('user', JSON.stringify(user));
+        window.location = "index.html"
+      // }
+    }
+    // sự kiện nhấn nút đăng ký
+
+    submit_SN.addEventListener('click', authenUser);
+  
+
+// ==============================SIGN UP==========================
+
+
+    const name = document.getElementById('name_SU');
+    const email = document.getElementById('email_SU');
+    
+    const pass = document.getElementById('pass_SU');
+    const submit = document.getElementById('sign-btn');
+
+    // kiểm tra tính hợp lệ của dữ liệu
+    function isEmptyData(str) {
+      return str === null;
+    }
+
+    function validationForm() {
+      let nameRegex = /^[a-zA-Z\s]+$/;
+      let emailRegex = /^[a-zA-Z0-9]+@(gmail|yahoo|outlook)\.com$/;
+      let userRegex = /^[a-zA-Z0-9]{5,}$/;
+
+      // if (!isEmptyData(name.value) || !isEmptyData(email.value) || !isEmptyData(username.value)) {
+
+      //     alert("you have field empty");
+      //     return false;
+      // }
+
+      if (!nameRegex.test(name.value)) {
+        alert("the name should contain alphabets ");
+        return false;
+      }
+
+      if (!emailRegex.test(email.value)) {
+        alert("the email a valid email ");
+        return false;
+      }
+      
+      return true; //Đúng
+    }
+
+    //  --dang ky
+
+    function registerForm() {
+      if (!validationForm()) {//nếu return false
+        return;
+      }
+
+      const dbRef = ref(db);
+
+      get(child(dbRef, "User/" + name.value)).then((ressult) => {
+
+        if (ressult.exists()) {
+          // nếu tài khoản username đã tồn tại
+          alert("Account already exist");
+        } else {
+          // nếu tài khoản username chưa tồn tại tiến hành lưu vào database firebase
+          set(ref(db, "User/" + name.value),
+            {
+              name: name.value,
+              email: email.value,
+              // password: pass.value
+              password: encPass()
+            }).then(() => {
+              alert("account add success")
+              window.location = "log.html"
+            }).catch((error) => {
+              alert("error " + error);
+            })
+        }
+      })
+
+      
+    }
+
+    // mã hoá mật khẩu
+
+    function encPass() {
+      var encryptionPass = CryptoJS.AES.encrypt(pass.value, pass.value);
+      return encryptionPass.toString();
+    }
+    // sự kiện nhấn nút đăng ký
+
+    submit.addEventListener('click', registerForm);
+
+
+  </script>
+
+ <!-- CRYPTO JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+ integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="../static/javascript/js/login.js"></script>
+
+</body>
+
+</html>
