@@ -91,7 +91,7 @@
 
         <div class="carousel">
           <div class="images-wrapper">
-            <img src="../static/images/IMG_1835.JPG" class="image img-1 show" alt="" />
+            <img src="../static/images/log1.png" class="image img-1 show" alt="" />
             <img src="../static/images/IMG_1836.JPG" class="image img-2" alt="" />
             <img src="../static/images/IMG_1837.JPG" class="image img-3" alt="" />
           </div>
@@ -132,13 +132,14 @@
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyAutdWKLA6w90IuTVqSUCCM42_UkuVqBy4",
-      authDomain: "swift-area-275101.firebaseapp.com",
-      projectId: "swift-area-275101",
-      storageBucket: "swift-area-275101.appspot.com",
-      messagingSenderId: "1072376327891",
-      appId: "1:1072376327891:web:9273ed10fa05c226fbee26"
-    };
+    apiKey: "AIzaSyBJkCJt5ggjYZHH3-oOSUyKAL9HmyVVwYY",
+    authDomain: "luongthevinh-5a364.firebaseapp.com",
+    projectId: "luongthevinh-5a364",
+    storageBucket: "luongthevinh-5a364.appspot.com",
+    messagingSenderId: "595424670888",
+    appId: "1:595424670888:web:1e1530b2649b27242a3e9d",
+    measurementId: "G-19Z2SWCP8E"
+  };
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase();
@@ -163,12 +164,12 @@
             if (dbpass == pass_SN.value) {
                 login(result.val());
             } else {
-                alert("user not exist");
+                alert("Vui lòng kiểm tra lại thông tin đăng nhập");
             }
         } else {
             // nếu tài khoản username chưa tồn tại 
 
-            alert("username or password incorrect");
+            alert("Vui lòng kiểm tra lại thông tin đăng nhập");
         }
     })
     }
@@ -195,7 +196,7 @@
 
         localStorage.setItem('keepLogIn', 'Yes');
         localStorage.setItem('user', JSON.stringify(user));
-        window.location = "index.html"
+        window.location = "profile.html"
       // }
     }
     // sự kiện nhấn nút đăng ký

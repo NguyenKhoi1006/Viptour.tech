@@ -1,5 +1,5 @@
 /*=============== GOOGLE FONTS ===============*/
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:wght@300&family=Roboto:wght@300&display=swap');
 
 /*=============== VARIABLES CSS ===============*/
 :root {
@@ -9,13 +9,13 @@
   --hue: 14;
   --first-color: hsl(var(--hue), 91%, 54%);
   --first-color-alt: hsl(var(--hue), 91%, 50%);
-  --title-color: hsl(var(--hue), 4%, 100%);
-  --text-color: hsl(var(--hue), 4%, 85%);
+  --title-color: hsl(0, 0%, 0%);
+  --text-color: hsl(0, 4%, 18%);
   --text-color-light: hsl(var(--hue), 4%, 55%);
 
   /*Green gradient*/
-  --body-color: linear-gradient(90deg, hsl(120, 0%, 52%) 0%, hsl(0, 0%, 33%) 100%);
-  --container-color: linear-gradient(136deg, hsl(120, 0%, 52%) 0%, hsl(0, 0%, 33%) 100%);
+  --body-color: linear-gradient(90deg, hsl(0, 0%, 100%) 0%, rgb(255, 255, 255) 100%);
+  --container-color: linear-gradient(136deg, hsla(224, 95%, 32%, 0.8) 0%, hsla(224, 95%, 32%, 0.8) 100%);
   
   /*Red gradient*/
   /* --body-color: linear-gradient(90deg, hsl(360, 28%, 40%) 0%, hsl(18, 28%, 40%) 100%);
@@ -26,7 +26,7 @@
   --container-color: hsl(30, 8%, 10%); */
 
   /*========== Font and typography ==========*/
-  --body-font: 'Poppins', sans-serif;
+  /* --body-font: 'Poppins', sans-serif; */
   --biggest-font-size: 2rem;
   --h1-font-size: 1.5rem;
   --h2-font-size: 1.25rem;
@@ -129,7 +129,7 @@ button{
 
 /*=============== LAYOUT ===============*/
 .container{
-  max-width: 1470px;
+  max-width: fit-content;
   margin-left: var(--mb-1-5);
   margin-right: var(--mb-1-5);
 }
@@ -145,7 +145,7 @@ button{
 /*=============== HEADER ===============*/
 .header{
   width: 100%;
-  background: var(--body-color); 
+  background: var(--container-color); 
   position: fixed;
   top: 0;
   left: 0;
@@ -156,12 +156,13 @@ button{
 .nav{
   height: var(--header-height);
   display: flex;
-  justify-content: space-between;
+  
   align-items: center;
 }
 
 .nav__logo{
   display: flex;
+  margin-right: 2rem;
   align-items: center;
   column-gap: .5rem;
   font-weight: var(--font-medium);
@@ -169,13 +170,16 @@ button{
 }
 
 .nav__logo-img{
-  width: 7rem;
+  width: 10rem;
+  
 }
 
 .nav__link,
 .nav__logo,
 .nav__close{
-  color: var(--title-color);
+  /* color: var(--container-color); */
+  color: rgb(255, 255, 255);
+
 }
 
 
@@ -213,12 +217,15 @@ button{
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 0.4rem;
+  row-gap: 0.5rem;
 }
 
 .nav__link{
+  display: flex;
   text-transform: uppercase;
   font-weight: var(--font-black);
+  text-align: center;
+  
   transition: .4s;
 }
 
@@ -231,26 +238,26 @@ button{
   top: 0;
 }
 
-/* Change background header */
+/* Change background header
 .scroll-header{
   background: var(--container-color);
-}
+} */
 
 /* Active link */
-.active-link{
+/* .active-link{
   position: relative;
-}
+} */
 
-.active-link::before{
+/* .active-link::before{
   content: '';
   position: absolute;
   bottom: -.75rem;
   left: 45%;
   width: 5px;
   height: 5px;
-  background-color: var(--title-color);
-  border-radius: 50%;
-}
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%; */
+ 
 
 /*=============== HOME ===============*/
 .home__content{
@@ -265,6 +272,7 @@ button{
 
 .home__img{
   height: 250px;
+  border-radius: 20px;
   justify-self: center;
 }
 
@@ -347,8 +355,8 @@ button{
 /*=============== BUTTONS ===============*/
 .button{
   display: inline-block;
-  background-color: var(--first-color);
-  color: var(--title-color);
+  background-color: rgb(17, 36, 211);
+  color: rgb(255, 255, 255);
   padding: 1rem 1.75rem;
   border-radius: .5rem;
   font-weight: var(--font-medium);
@@ -364,20 +372,24 @@ button{
 }
 
 .button--in{
-  border: 2px solid;
+  
   text-align: center;
+  font-size: large;
+  margin: auto;
   background-color: transparent;
   border-radius: 3rem;
-  padding: .25rem 2.5rem;
-  width: 19rem;
+  color: rgb(255, 255, 255);
+  height: auto;
+  width: auto;
 }
 .button--out{
-  border: 2px solid;
+  border: 2px white solid;
+  color: rgb(255, 255, 255);
   text-align: center;
   background-color: transparent;
   border-radius: 3rem;
-  padding: .25rem 2.5rem;
-  width: 10rem;
+  padding: .5rem 2.5rem;
+  
 }
 
 .button--in:hover, .button--out:hover{
@@ -396,6 +408,8 @@ button{
 }
 
 /*=============== CATEGORY ===============*/
+
+
 .category__container{
   grid-template-columns: repeat(2, 1fr);
   
@@ -440,7 +454,6 @@ button{
 .about__img{
   max-width: 100%px;
   justify-self: center;
-  animation: floating 2s ease-in-out infinite;
   border-radius: 20px;
 }
 
@@ -726,10 +739,10 @@ button{
 }
 
 /*=============== SCROLL UP ===============*/
-.scrollup{
+/* .scrollup{
   position: fixed;
   background: var(--container-color);
-  right: 1rem;
+  left: 4rem;
   bottom: -20%;
   display: inline-flex;
   padding: .3rem;
@@ -741,27 +754,27 @@ button{
 
 .scrollup__icon{
   font-size: 1.25rem;
-  color: var(--title-color);
+  color: rgba(255, 255, 255,);
 }
 
 .scrollup:hover{
-  background: var(--container-color);
+  background: rgb(255, 255, 255);
   opacity: 1;
 }
 
 /* Show Scroll Up*/
 .show-scroll{
   bottom: 3rem;
-}
+} */
 
 /*=============== SCROLL BAR ===============*/
 ::-webkit-scrollbar{
-  width: 0.4rem;
-  background: #413e3e;
+  width: 0.3rem;
+  background: #ffffff;
 }
 
 ::-webkit-scrollbar-thumb{
-  background: #7f7a7a;
+  background: #000000;
   border-radius: 20px;
 }
 

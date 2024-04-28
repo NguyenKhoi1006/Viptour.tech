@@ -34,7 +34,7 @@ let homeSwiper = new Swiper(".home-swiper", {
     spaceBetween: 30,
     loop: 'true',
     autoplay:{
-              delay:2000,
+              delay:5000,
               disableOnInteraction: false,
           },
       
